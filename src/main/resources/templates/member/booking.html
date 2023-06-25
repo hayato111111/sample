@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<table>
+
+
+
+					<tr>
+						<td>部屋番号</td>
+						<td th:text="${roomNumber}"></td>
+					</tr>
+					<tr>
+						<td>タイプ1</td>
+						<td th:text="${roomType1}"></td>
+					</tr>
+					<tr>
+						<td>タイプ2</td>
+						<td th:text="${roomType2}"></td>
+					</tr>
+					<tr>
+						<td>料金</td>
+						<td th:text="${fee}"></td>
+					</tr>
+					<tr>
+						<td>料金</td>
+						<td th:text="${day}"></td>
+					</tr>
+
+				</table>
+				
+				<button onclick="location.href='/member/bookingCheck'">予約</button>
+
+</body>
+</html>

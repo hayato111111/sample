@@ -18,12 +18,14 @@ import com.example.demo.entity.Booking;
 import com.example.demo.entity.Inn;
 import com.example.demo.entity.Member;
 import com.example.demo.entity.Room;
+import com.example.demo.model.BookingModel;
 import com.example.demo.model.MemberModel;
 import com.example.demo.model.MemberModelUpdate;
 import com.example.demo.model.RoomModelUpdate;
 import com.example.demo.repository.BookingRepository;
 import com.example.demo.repository.InnRepository;
 import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.PayRepository;
 import com.example.demo.repository.RoomRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -40,6 +42,9 @@ public class MemberController {
 	RoomModelUpdate roomModelUpdate;
 	
 	@Autowired
+	BookingModel bookingModel;
+	
+	@Autowired
 	BookingRepository bookingRepository;
 	
 	@Autowired
@@ -47,6 +52,9 @@ public class MemberController {
 	
 	@Autowired
 	RoomRepository roomRepository;
+	
+	@Autowired
+	PayRepository payRepository;
 	
 	@Autowired
 	MemberModelUpdate memberModelUpdate;
@@ -250,10 +258,13 @@ public class MemberController {
 			Model model
 			) {
 		
+		
+		
 		//セッションに登録。下のカレンダーで使うから
 		Room roomSub = roomRepository.findByRoomId(roomId);
 		
 		roomModelUpdate.setRoomId(roomSub.getRoomId());
+		
 		roomModelUpdate.setRoomNumber(roomSub.getRoomNumber());
 		roomModelUpdate.setRoomType1Id(roomSub.getRoomType1Id());
 		roomModelUpdate.setRoomType2Id(roomSub.getRoomType2Id());
@@ -349,17 +360,59 @@ public class MemberController {
 	   
 	    @GetMapping("/member/booking")
 	    public String booking(
-	    		@RequestParam(name="day",required=false) LocalDate day
+	    		@RequestParam(name="day",required=false) LocalDate day,
+	    		Model model
 	    		) {
 	    	
 	    	System.out.println(day);
-	    	return "member/addtop";//個々を直そう！
+	    	bookingModel.setMemberId(memberModel.getMemberId());
+	    	bookingModel.setMemberName(memberModel.getName());
+	    	bookingModel.setRoomId(roomModelUpdate.getRoomId());
+	    	bookingModel.setRoomNumber(roomModelUpdate.getRoomNumber());
+	    	bookingModel.setDay(day) ;  	
+	    	
+	    	Room room = roomRepository.findByRoomId(roomModelUpdate.getRoomId());    	
+	    	
+	    	model.addAttribute("roomNumber",room.getRoomNumber());
+	    	model.addAttribute("roomType1",room.getRoomType1().getRoomType1());
+	    	model.addAttribute("roomType2",room.getRoomType2().getRoomType2());
+	    	model.addAttribute("fee",room.getFee());
+	    	model.addAttribute("day",day);
+	    	
+	    	return "member/booking";//個々を直そう！
 	    	
 	    }
 	    
+	    @GetMapping("/member/bookingCheck")
+	    public String Check(Model model) {
+	    	model.addAttribute("a","a");
+	    	
+Room room = roomRepository.findByRoomId(roomModelUpdate.getRoomId());    	
+	    	
+	    	model.addAttribute("roomNumber",room.getRoomNumber());
+	    	model.addAttribute("roomType1",room.getRoomType1().getRoomType1());
+	    	model.addAttribute("roomType2",room.getRoomType2().getRoomType2());
+	    	model.addAttribute("fee",room.getFee());
+	    	model.addAttribute("day",bookingModel.getDay());
+	    	
+	    	
+	    	return "member/bookingcheck";
+	    	}
 	
-	
-	
+	    @PostMapping("/member/bookingOk")
+	    public String bookingOk(
+	    		@RequestParam(name="payId",required=false) Integer payId
+	    		) {
+	    	
+	    	bookingModel.setPayId(payId);
+	    	Booking booking = new Booking(bookingModel.getMemberId(),
+	    			bookingModel.getRoomId(),bookingModel.getPayId(),bookingModel.getDay());
+	    	
+	    	bookingRepository.save(booking);
+	    	
+	    	return "member/bookingok";
+	    	
+	    }
 	
 	
 
