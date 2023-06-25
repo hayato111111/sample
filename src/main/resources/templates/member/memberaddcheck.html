@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+<header>
+<span>La vie en rose</span>
+<span>新規会員登録</span>
+</header>
+
+<p>以下の内容で登録します</p>
+
+<table id="table1" border="1">
+
+
+			<tr>
+				<th>名前</th>
+			<tr>
+			<tr>
+				<td th:text="${@memberModelUpdate.name}"></td>
+			</tr>
+			
+			<tr>
+				<th>年齢</th>
+			<tr>
+			<tr>
+				<td th:text="${@memberModelUpdate.age}"></td>
+			</tr>
+			
+			<tr>
+				<th>住所</th>
+			<tr>
+			<tr>
+				<td th:text="${@memberModelUpdate.address}"></td>
+			</tr>
+			
+			<tr>
+				<th>メールアドレス</th>
+			<tr>
+			<tr>
+				<td th:text="${@memberModelUpdate.email}"></td>
+			</tr>
+			
+			<tr>
+				<th>パスワード</th>
+			<tr>
+			<tr>
+				<td th:text="${@memberModelUpdate.password}"></td>
+			</tr>
+
+		</table>
+		
+		<button onclick="location.href='/member/addok'">確認</button>
+        <button onclick="location.href='member/addtop'">戻る</button>
+		
+
+</body>
+</html>

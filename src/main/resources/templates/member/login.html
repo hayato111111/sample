@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+</head>
+<body>
+
+<header>
+<span>La vie en rose</span>
+<span>宿泊予約サイト</span>
+</header>
+	
+	<p  th:text="${error}"></p>
+	<form action="/member/login" method="post">
+
+		<button onclick="location.href='/member/add'">新規登録</button>
+		<table >
+
+			<tr>
+				<td>メールアドレス</td>
+				<td><input  type="text" name="email"></td>
+			</tr>
+
+			<tr>
+				<td>パスワード:</td>
+				<td><input  type="password" name="password"></td>
+			</tr>
+
+		</table>
+		<button>ログイン</button>
+	</form>
+	<button onclick="location.href='/toppage'">マイページ</button>
+</body>
+</html>

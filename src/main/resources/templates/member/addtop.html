@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<header>
+
+		<span>La vie en rose</span>
+　　　　　　　<span>新規会員登録</span>
+	</header>
+   <P>登録したい会員情報を入力して下さい</P>
+
+
+<form action="/member/add" method="post">
+		<table id="table1" border="1">
+
+
+			<tr>
+				<th>名前</th>
+			<tr>
+			<tr>
+				<td><input type="text" name="name"></td>
+			</tr>
+			
+			<tr>
+				<th>年齢</th>
+			<tr>
+			<tr>
+				<td><input type="text" name="age"></td>
+			</tr>
+			
+			<tr>
+				<th>住所</th>
+			<tr>
+			<tr>
+				<td><input type="text" name="adress"></td>
+			</tr>
+			
+			<tr>
+				<th>メールアドレス</th>
+			<tr>
+			<tr>
+				<td><input type="text" name="email"></td>
+			</tr>
+			
+			<tr>
+				<th>パスワード</th>
+			<tr>
+			<tr>
+				<td><input type="text" name="password"></td>
+			</tr>
+
+		</table>
+		
+		<button>登録</button>
+		</form>
+	<button onclick="location.href='/toppage'">TOPページ</button>
+</body>
+</html>

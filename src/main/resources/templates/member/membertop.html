@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<header>
+<span>La vie en rose</span>
+<span>宿泊予約サイト</span>
+<div th:if="!${@memberModel.name}">
+<span><a href="/member/login">ログイン</a></span>
+</div>
+<div th:if="${@memberModel.name}">
+<span>こんにちは、[[${@memberModel.name}]]さん</span>
+<span><a href="/member/logout">ログアウト</a></span>
+</div>
+</header>
+
+<div>
+<button onclick="location.href='/member/add'">新規登録</button>
+<button onclick="location.href='mypage'">マイページ</button>
+</div>
+
+<main>
+<img src="/img/japan.jpg"/>
+
+
+<a href="/member/area?areaId=1">北海道・東北</a>
+<a href="/member/area?areaId=2">関東・中部</a>
+<a href="/member/area?areaId=3">近畿・中国・四国</a>
+<a href="/member/area?areaId=4">九州・沖縄</a>
+</main>
+</body>
+</html>

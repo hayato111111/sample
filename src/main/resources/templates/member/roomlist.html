@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+	<header>
+		<span>La vie en rose</span>
+		<div th:if="${@memberModel.name}">
+			<span>こんにちは、[[${@memberModel.name}]]さん</span>
+			<span><a href="/member/logout">ログアウト</a></span>
+		</div>
+	</header>
+
+	<main>
+
+<a th:href="@{'/member/room?innId='+${innId}}"  >全部屋表示</a>
+		<form action="/member/room" method="get">
+			料金<input type="number" name="price1">～
+			<input type="number" name="price2"><br>
+
+<input type="radio" name="roomtype1Id" value="1"checked>禁煙
+<input type="radio" name="roomtype1Id" value="2">喫煙<br>
+
+<input type="radio" name="roomtype2Id" value="1" checked>和室
+<input type="radio" name="roomtype2Id" value="2">洋室<br>
+
+<input type="hidden" name="innId" th:value="${innId}">
+<button>検索</button>
+
+		</form>
+
+		<div class="contents" th:each="room:${roomList}">
+
+			<div class="item">
+				<table>
+
+
+
+					<tr>
+						<td>部屋番号</td>
+						<td th:text="${room.roomNumber}"></td>
+					</tr>
+					<tr>
+						<td>タイプ1</td>
+						<td th:text="${room.roomType1.roomType1}"></td>
+					</tr>
+					<tr>
+						<td>タイプ2</td>
+						<td th:text="${room.roomType2.roomType2}"></td>
+					</tr>
+					<tr>
+						<td>料金</td>
+						<td th:text="${room.fee}"></td>
+					</tr>
+
+				</table>
+			</div>
+
+
+			<div class="item">
+				<img th:src="${room.roomPicture}" />
+			</div>
+			
+			<div class="item">
+				<form action="/member/emptye">
+				<input type="hidden" name="roomId" th:value="${room.roomId}">
+				<button>空き状況</button>
+				</form>
+			</div>
+			
+
+
+
+		</div>
+	</main>
+
+
+</body>
+
+</html>
